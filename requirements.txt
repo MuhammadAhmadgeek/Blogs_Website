@@ -1,0 +1,14 @@
+flask
+flask-login
+flask-bootstrap5
+flask-sqlalchemy
+flask-ckeditor
+flask-gravatar
+flask-wtf
+werkzeug
+python-dotenv
+gunicorn
+psycopg2-binary
+requests
+sqlalchemy
+email-validator
