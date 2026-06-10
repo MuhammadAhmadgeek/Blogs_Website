@@ -12,7 +12,7 @@ from flask import render_template,url_for
 import requests
 import smtplib
 from dotenv import load_dotenv
-from flask_bootstrap import Bootstrap
+from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Integer, String, Text, ForeignKey
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
@@ -23,7 +23,7 @@ from forms import MyForm, EditPostForm,login_form,register_form,CommentForm
 load_dotenv()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fallback-dev-key')
-Bootstrap(app)
+Bootstrap5(app)
 login_manager.init_app(app)
 # CREATE DATABASE
 class Base(DeclarativeBase):
