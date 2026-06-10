@@ -1,6 +1,6 @@
 flask==2.3.3
 flask-login
-flask-bootstrap5
+flask-bootstrap
 flask-sqlalchemy
 flask-ckeditor
 flask-gravatar
