@@ -1,9 +1,9 @@
-flask
+flask==2.3.3
 flask-login
 flask-bootstrap5
 flask-sqlalchemy
 flask-ckeditor
-flask-gravatar2
+flask-gravatar
 flask-wtf
 werkzeug
 python-dotenv
