@@ -1,14 +1,15 @@
 flask==2.3.3
 flask-login
-flask-bootstrap5
+flask-bootstrap
 flask-sqlalchemy
 flask-ckeditor
 flask-gravatar
 flask-wtf
-werkzeug
+werkzeug==2.3.7
 python-dotenv
 gunicorn
 psycopg2-binary
 requests
 sqlalchemy
 email-validator
+bleach
