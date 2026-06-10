@@ -23,7 +23,7 @@ from forms import MyForm, EditPostForm,login_form,register_form,CommentForm
 load_dotenv()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fallback-dev-key')
-Bootstrap5(app)
+Bootstrap(app)
 login_manager.init_app(app)
 # CREATE DATABASE
 class Base(DeclarativeBase):
