@@ -12,7 +12,7 @@ from flask import render_template,url_for
 import requests
 import smtplib
 from dotenv import load_dotenv
-from flask_bootstrap import Bootstrap5
+from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Integer, String, Text, ForeignKey
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
