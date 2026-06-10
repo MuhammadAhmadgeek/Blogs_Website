@@ -1,6 +1,6 @@
 import os
 from enum import unique
-from flask_gravatar2 import Gravatar
+from flask_gravatar import Gravatar
 import flask
 from flask_ckeditor import CKEditor
 from flask_login import LoginManager, UserMixin, login_user, login_required, current_user, logout_user
