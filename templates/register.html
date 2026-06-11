@@ -1,20 +1,28 @@
-{% from "bootstrap5/form.html" import render_form %} {% block content %} {%
-include "header.html" %}
+{% extends "base.html" %}
+{% block title %}Register — Ahmad's Blog{% endblock %}
 
-<!-- Page Header -->
-
+{% block content %}
+{% from 'bootstrap5/form.html' import render_form %}
 <main class="mb-4">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <!--TODO: render your registration form here-->
-            {% from 'Bootstrap5/form.html' import render_form %}
-            <form action="{{ url_for('register') }}" method="POST">
-              {{ render_form(form) }}
-            </form>
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-lg-6 col-md-8">
+        <div class="auth-card">
+          <div class="auth-card-icon">
+            <i class="fas fa-user-plus"></i>
+          </div>
+          <h2 class="auth-card-title">Create Account</h2>
+          <p class="auth-card-subtitle">Join the community and start writing today</p>
+          <form action="{{ url_for('register') }}" method="POST">
+            {{ render_form(form) }}
+          </form>
+          <p class="auth-switch mt-3 text-center">
+            Already have an account?
+            <a href="{{ url_for('login') }}">Log in here</a>
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </main>
-
-{% include "footer.html" %} {% endblock %}
+{% endblock %}

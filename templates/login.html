@@ -1,30 +1,28 @@
-{% from "bootstrap5/form.html" import render_form %} {% block content %} {%
-include "header.html" %}
+{% extends "base.html" %}
+{% block title %}Log In — Ahmad's Blog{% endblock %}
 
-<!-- Page Header -->
-
+{% block content %}
+{% from 'bootstrap5/form.html' import render_form %}
 <main class="mb-4">
-  <div class="container">
-    <div class="row">
-      <!-- TODO: add a flash message here for users registering twice -->
-      {% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <!--TODO: render login form here-->
-            {% from 'bootstrap5/form.html' import render_form %}
-            <form action="{{ url_for('login') }}" method="POST">
-              {{ render_form(form) }}
-            </form>
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-lg-6 col-md-8">
+        <div class="auth-card">
+          <div class="auth-card-icon">
+            <i class="fas fa-sign-in-alt"></i>
+          </div>
+          <h2 class="auth-card-title">Welcome Back</h2>
+          <p class="auth-card-subtitle">Log in to continue reading and writing</p>
+          <form action="{{ url_for('login') }}" method="POST">
+            {{ render_form(form) }}
+          </form>
+          <p class="auth-switch mt-3 text-center">
+            Don't have an account?
+            <a href="{{ url_for('register') }}">Register here</a>
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </main>
-
-{% include "footer.html" %} {% endblock %}
+{% endblock %}
