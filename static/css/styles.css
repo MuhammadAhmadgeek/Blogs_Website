@@ -10879,45 +10879,58 @@ a:hover { color: var(--blog-accent); text-decoration: none; opacity: 0.8; }
   border-bottom: 1px solid var(--blog-border) !important;
 }
 
-/* ─── Masthead/Header ────────────────────────────────────────── */
+/* ─── Masthead/Header — VIBRANT ─────────────────────────────── */
 header.masthead {
   position: relative;
   overflow: hidden;
-  background-color: var(--blog-bg) !important;
-  border-bottom: 1px solid var(--blog-border);
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: scroll !important;
+  min-height: 380px;
+  border-bottom: none;
 }
-/* Remove the dark overlay */
+/* Light tint only — keeps image vibrant while text stays readable */
 header.masthead::before {
-  display: none !important;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 109, 119, 0.45) 0%,
+    rgba(10, 147, 150, 0.28) 60%,
+    rgba(0,0,0,0.15) 100%
+  ) !important;
+  z-index: 1;
+  display: block !important;
 }
-/* Remove the background image overlay entirely, or make it subtle if it must be there */
-header.masthead {
-  background-blend-mode: multiply;
+header.masthead .container {
+  position: relative;
+  z-index: 2;
 }
 
 header.masthead .site-heading h1,
 header.masthead .page-heading h1,
 header.masthead .post-heading h1 {
   font-family: 'Inter', sans-serif !important;
-  font-weight: 300 !important;
-  letter-spacing: 0.05em;
-  color: var(--blog-text) !important;
-  text-shadow: none !important;
-  text-transform: uppercase;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em;
+  color: #fff !important;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3) !important;
+  text-transform: none;
 }
 header.masthead .subheading {
   font-family: 'Inter', sans-serif !important;
   font-weight: 400 !important;
   letter-spacing: 0.02em;
-  color: var(--blog-text-muted) !important;
-  text-shadow: none !important;
+  color: rgba(255,255,255,0.9) !important;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.25) !important;
 }
 header.masthead .post-heading .meta {
-  color: var(--blog-text-muted) !important;
+  color: rgba(255,255,255,0.8) !important;
   text-shadow: none !important;
 }
 header.masthead .post-heading .meta a {
-  color: var(--blog-text) !important;
+  color: #fff !important;
 }
 
 /* ─── Flash / Alert Messages ─────────────────────────────────── */
@@ -11473,42 +11486,13 @@ hr {
   transform: translateY(0);
 }
 
-/* ─── Masthead — vibrant gradient overlay ────────────────────── */
-header.masthead {
-  position: relative;
-  overflow: hidden;
-  min-height: 380px;
-  background-color: #006d77 !important;
-  background-size: cover;
-  background-position: center;
-}
-header.masthead::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg,
-    rgba(0,109,119,0.82) 0%,
-    rgba(131,197,190,0.55) 50%,
-    rgba(255,221,210,0.35) 100%);
-  z-index: 0;
-  animation: gradientShift 10s ease infinite;
-  background-size: 200% 200%;
-}
-header.masthead .container {
-  position: relative;
-  z-index: 2;
-}
-header.masthead .site-heading,
-header.masthead .page-heading,
-header.masthead .post-heading { color: #fff !important; }
+/* ─── Masthead — vibrant (overrides above block) ─────────────── */
+/* The ::before rule above in the minimalist section handles the overlay.
+   This block just adds the fade-in animation to the text. */
 header.masthead h1 {
-  color: #fff !important;
-  text-shadow: 0 2px 16px rgba(0,0,0,0.2) !important;
   animation: fadeInUp 0.7s ease both;
 }
 header.masthead .subheading {
-  color: rgba(255,255,255,0.88) !important;
-  text-shadow: none !important;
   animation: fadeInUp 0.7s 0.15s ease both;
 }
 
