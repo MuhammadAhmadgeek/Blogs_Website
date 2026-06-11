@@ -10821,13 +10821,13 @@ header.masthead .post-heading .meta a {
 
 /* ─── Design Tokens ─────────────────────────────────────────── */
 :root {
-  --blog-bg:          #fff2e6; /* Cream/Off-white */
-  --blog-text:        #0b7978; /* Deep Teal */
-  --blog-text-muted:  #24b1ab; /* Bright Teal */
-  --blog-border:      #fbd8c0; /* Peach */
+  --blog-bg:          #edf6f9; /* Cool off-white */
+  --blog-text:        #006d77; /* Deep Teal */
+  --blog-text-muted:  #83c5be; /* Bright Teal */
+  --blog-border:      #ffddd2; /* Peach */
   --blog-card-bg:     #ffffff; /* White cards for contrast */
-  --blog-primary:     #0b7978;
-  --blog-accent:      #24b1ab;
+  --blog-primary:     #006d77;
+  --blog-accent:      #83c5be;
   --blog-radius:      8px; /* Slightly more rounded for this playful theme */
   --blog-radius-sm:   4px;
   --blog-transition:  all 0.2s ease-in-out;
