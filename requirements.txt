@@ -18,7 +18,7 @@ gunicorn
 psycopg2-binary
 email-validator
 bleach
-This mirrors your local environment exactly so it should work. Push and redeploy.
+
 
 
 
