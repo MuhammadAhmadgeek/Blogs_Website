@@ -14,28 +14,37 @@
           </p>
 
           <form id="contactForm" method="POST" action="/contact">
-            <div class="form-floating mb-3">
-              <input class="form-control contact-input" id="name" name="name" type="text"
+
+            <div class="mb-3">
+              <label class="contact-label" for="name">
+                <i class="fas fa-user me-1"></i> Name
+              </label>
+              <input class="form-control" id="name" name="name" type="text"
                      placeholder="Enter your name..." required />
-              <label for="name"><i class="fas fa-user me-1"></i> Name</label>
             </div>
 
-            <div class="form-floating mb-3">
-              <input class="form-control contact-input" id="email" name="email" type="email"
+            <div class="mb-3">
+              <label class="contact-label" for="email">
+                <i class="fas fa-envelope me-1"></i> Email Address
+              </label>
+              <input class="form-control" id="email" name="email" type="email"
                      placeholder="Enter your email..." required />
-              <label for="email"><i class="fas fa-envelope me-1"></i> Email Address</label>
             </div>
 
-            <div class="form-floating mb-3">
-              <input class="form-control contact-input" name="phone" id="phone" type="tel"
+            <div class="mb-3">
+              <label class="contact-label" for="phone">
+                <i class="fas fa-phone me-1"></i> Phone Number <span class="text-muted">(optional)</span>
+              </label>
+              <input class="form-control" name="phone" id="phone" type="tel"
                      placeholder="Enter your phone number..." />
-              <label for="phone"><i class="fas fa-phone me-1"></i> Phone Number (optional)</label>
             </div>
 
-            <div class="form-floating mb-4">
-              <textarea class="form-control contact-input" name="message" id="message"
-                        placeholder="Enter your message here..." style="height: 12rem" required></textarea>
-              <label for="message"><i class="fas fa-comment me-1"></i> Message</label>
+            <div class="mb-4">
+              <label class="contact-label" for="message">
+                <i class="fas fa-comment me-1"></i> Message
+              </label>
+              <textarea class="form-control" name="message" id="message"
+                        placeholder="Enter your message here..." rows="6" required></textarea>
             </div>
 
             <div class="d-grid">
