@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}My Posts — Ahmad's Blog{% endblock %}
+
+{% block content %}
+<main class="mb-5">
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-11 col-lg-10 col-xl-9">
+
+        <!-- Header Row -->
+        <div class="my-posts-header d-flex align-items-center justify-content-between mb-4 fade-in-up">
+          <div>
+            <h2 class="my-posts-title">My Posts</h2>
+            <p class="my-posts-subtitle">{{ posts|length }} post{{ 's' if posts|length != 1 else '' }} published</p>
+          </div>
+          <a href="{{ url_for('create_post') }}" class="btn-create-post">
+            <i class="fas fa-plus me-2"></i>New Post
+          </a>
+        </div>
+
+        {% if posts %}
+          {% for post in posts %}
+          <div class="my-post-card fade-in-up" style="animation-delay: {{ loop.index0 * 0.08 }}s">
+            <div class="my-post-card-body">
+              <div class="my-post-img-wrap">
+                <img src="{{ post.img_url }}" alt="{{ post.title }}" class="my-post-thumb" onerror="this.src='{{ url_for('static', filename='assets/img/home-bg.jpg') }}'">
+                <div class="my-post-thumb-overlay"></div>
+              </div>
+              <div class="my-post-info">
+                <span class="my-post-date"><i class="far fa-calendar-alt me-1"></i>{{ post.date }}</span>
+                <h3 class="my-post-title-text">
+                  <a href="{{ url_for('sample_post', postid_=post.id) }}">{{ post.title }}</a>
+                </h3>
+                <p class="my-post-subtitle-text">{{ post.subtitle }}</p>
+                <div class="my-post-stats">
+                  <span class="stat-badge"><i class="far fa-comment me-1"></i>{{ post.comments|length }} comment{{ 's' if post.comments|length != 1 else '' }}</span>
+                </div>
+              </div>
+              <div class="my-post-actions">
+                <a href="{{ url_for('sample_post', postid_=post.id) }}" class="action-btn action-view" title="View">
+                  <i class="fas fa-eye"></i>
+                </a>
+                <a href="{{ url_for('edit_post', id=post.id) }}" class="action-btn action-edit" title="Edit">
+                  <i class="fas fa-pen"></i>
+                </a>
+                <a href="{{ url_for('delete_post', id=post.id) }}"
+                   class="action-btn action-delete"
+                   title="Delete"
+                   onclick="return confirm('Delete \'{{ post.title }}\'? This cannot be undone.')">
+                  <i class="fas fa-trash"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+        {% else %}
+          <div class="my-posts-empty fade-in-up">
+            <div class="empty-icon-wrap">
+              <i class="fas fa-feather-alt"></i>
+            </div>
+            <h4>No posts yet</h4>
+            <p>You haven't written anything yet. Start your first post!</p>
+            <a href="{{ url_for('create_post') }}" class="btn-create-post">
+              <i class="fas fa-plus me-2"></i>Write your first post
+            </a>
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -202,6 +202,17 @@ def delete_comment(id):
     return redirect(url_for('sample_post', postid_=postid))
 
 
+@app.route("/my-posts")
+@login_required
+def my_posts():
+    user_posts = BlogPost.query.filter_by(author_id=current_user.id).all()
+    return render_template("my_posts.html",
+                           bg_image=url_for('static', filename='assets/img/home-bg.jpg'),
+                           H1="My Posts",
+                           H2="Manage everything you've written.",
+                           posts=user_posts)
+
+
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_post(id):
