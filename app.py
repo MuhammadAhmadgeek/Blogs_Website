@@ -239,7 +239,11 @@ def edit_post(id):
                            form=form_, post=post)
 
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/")
+def landing():
+    return render_template("landing.html")
+
+@app.route("/login", methods=['GET', 'POST'])
 def login():
     main_heading = "Log In"
     sub_head = "Welcome Back!"

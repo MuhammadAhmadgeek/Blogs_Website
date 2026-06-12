@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome | Ahmad's Blog</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --bg: #0a0b10;
+            --surface: #141620;
+            --primary: #4ade80;
+            --secondary: #3b82f6;
+            --text: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+
+        /* Animated Background Particles */
+        .bg-particles {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 20px 2px var(--primary);
+            animation: float 15s infinite linear;
+            opacity: 0.5;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100px) scale(2); opacity: 0; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            padding: 2rem;
+            transform-style: preserve-3d;
+            animation: enter 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        @keyframes enter {
+            0% { transform: translateZ(-500px) rotateX(20deg); opacity: 0; }
+            100% { transform: translateZ(0) rotateX(0); opacity: 1; }
+        }
+
+        h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transform: translateZ(50px);
+        }
+
+        p.subtitle {
+            font-size: 1.5rem;
+            color: #94a3b8;
+            margin-bottom: 4rem;
+            transform: translateZ(30px);
+        }
+
+        .options-grid {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            transform-style: preserve-3d;
+        }
+
+        /* 3D Card Styling */
+        .card-3d {
+            background: rgba(20, 22, 32, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem 2rem;
+            border-radius: 24px;
+            width: 280px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateZ(0);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-3d::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            transform: skewX(-20deg);
+            transition: 0.5s;
+        }
+
+        .card-3d:hover::before {
+            left: 150%;
+        }
+
+        .card-3d:hover {
+            transform: translateZ(40px) translateY(-10px) rotateX(10deg) rotateY(-5deg);
+            border-color: var(--primary);
+            box-shadow: 0 35px 60px -15px rgba(74, 222, 128, 0.2),
+                        0 0 40px rgba(74, 222, 128, 0.1);
+        }
+
+        .card-3d.register:hover {
+            border-color: var(--secondary);
+            box-shadow: 0 35px 60px -15px rgba(59, 130, 246, 0.2),
+                        0 0 40px rgba(59, 130, 246, 0.1);
+            transform: translateZ(40px) translateY(-10px) rotateX(10deg) rotateY(5deg);
+        }
+
+        .card-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+            transform: translateZ(20px);
+        }
+
+        .card-3d.login .card-icon { color: var(--primary); }
+        .card-3d.register .card-icon { color: var(--secondary); }
+
+        .card-3d:hover .card-icon {
+            transform: translateZ(40px) scale(1.1);
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            transform: translateZ(20px);
+        }
+
+        .card-desc {
+            font-size: 1rem;
+            color: #94a3b8;
+            transform: translateZ(10px);
+        }
+
+        /* 3D Mouse tracking effect setup */
+        .scene {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0; left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1200px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg-particles" id="particles"></div>
+
+    <div class="scene" id="scene">
+        <div class="container" id="container3d">
+            <h1>Ahmad's Blog</h1>
+            <p class="subtitle">Explore ideas, code, and more.</p>
+            
+            <div class="options-grid">
+                <a href="{{ url_for('login') }}" class="card-3d login">
+                    <div class="card-icon"><i class="fas fa-sign-in-alt"></i></div>
+                    <h2 class="card-title">Log In</h2>
+                    <p class="card-desc">Welcome back! Access your account.</p>
+                </a>
+                
+                <a href="{{ url_for('register') }}" class="card-3d register">
+                    <div class="card-icon"><i class="fas fa-user-plus"></i></div>
+                    <h2 class="card-title">Register</h2>
+                    <p class="card-desc">Join the community. Create an account.</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate Particles
+        const particlesContainer = document.getElementById('particles');
+        for(let i = 0; i < 40; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.animationDelay = (Math.random() * 15) + 's';
+            p.style.animationDuration = (10 + Math.random() * 20) + 's';
+            particlesContainer.appendChild(p);
+        }
+
+        // 3D Mouse Tracking
+        const scene = document.getElementById('scene');
+        const container = document.getElementById('container3d');
+
+        scene.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            container.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+
+        scene.addEventListener('mouseenter', () => {
+            container.style.transition = 'none';
+        });
+
+        scene.addEventListener('mouseleave', () => {
+            container.style.transition = 'transform 0.5s ease';
+            container.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        });
+    </script>
+</body>
+</html>
