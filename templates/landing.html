@@ -3,83 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmad's Blog VI</title>
+    <title>Ahmad's Space</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Chalet:wght@400;700&family=Oswald:wght@500;700&family=Roboto:wght@300;400;500;700&family=Pricedown&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <style>
-        /* Custom Font Fallbacks (mimicking GTA fonts) */
-        @import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@400;600;900&display=swap');
-
         :root {
-            --rs-black: #000000;
-            --rs-gold: #ffaa00;
-            --rs-white: #ffffff;
-            --rs-gray: #aaaaaa;
-            --sunset-top: #fca5a5;
-            --sunset-mid: #f472b6;
-            --sunset-bottom: #c084fc;
+            --bg-dark: #050505;
+            --text-light: #ffffff;
+            --text-muted: #a1a1aa;
+            --accent-pink: #f472b6;
+            --accent-purple: #c084fc;
+            --accent-cyan: #22d3ee;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         body, html {
-            height: 100%;
-            background-color: var(--rs-black);
-            color: var(--rs-white);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        /* ─── Cinematic Background ─── */
-        .hero-background {
+        /* ─── Fixed Cinematic Background ─── */
+        .fixed-bg {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: linear-gradient(to bottom, #4facfe 0%, #ff0844 50%, #ffb199 100%);
-            z-index: -2;
-            overflow: hidden;
+            background: linear-gradient(to bottom, #1e1b4b 0%, #be123c 60%, #fb923c 100%);
+            z-index: -3;
         }
 
-        /* Palm Tree Silhouettes using CSS masking/SVG data */
+        .sun {
+            position: fixed;
+            bottom: 10vh;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, #fde047 0%, #f97316 40%, transparent 70%);
+            z-index: -2;
+            opacity: 0.9;
+            filter: blur(8px);
+        }
+
         .palm-trees {
-            position: absolute;
+            position: fixed;
             bottom: -5vh; left: 0; width: 100vw; height: 60vh;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" preserveAspectRatio="none"><path d="M0,400 L0,300 C50,300 80,250 100,200 C110,220 120,240 130,220 C140,200 130,150 150,120 C160,160 180,180 200,200 C180,250 150,350 150,400 L0,400 Z" fill="black" opacity="0.8"/><path d="M800,400 L800,280 C850,280 880,220 900,180 C910,200 920,220 930,200 C940,180 930,120 950,90 C960,140 980,160 1000,180 L1000,400 L800,400 Z" fill="black" opacity="0.9"/><path d="M400,400 L400,350 C420,350 440,300 450,280 C460,300 470,310 480,290 C490,270 480,250 500,220 C510,250 530,260 550,280 C540,320 520,380 520,400 L400,400 Z" fill="black" opacity="0.7"/></svg>');
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" preserveAspectRatio="none"><path d="M0,400 L0,300 C50,300 80,250 100,200 C110,220 120,240 130,220 C140,200 130,150 150,120 C160,160 180,180 200,200 C180,250 150,350 150,400 L0,400 Z" fill="%23050505" opacity="1"/><path d="M800,400 L800,280 C850,280 880,220 900,180 C910,200 920,220 930,200 C940,180 930,120 950,90 C960,140 980,160 1000,180 L1000,400 L800,400 Z" fill="%23050505" opacity="1"/><path d="M400,400 L400,350 C420,350 440,300 450,280 C460,300 470,310 480,290 C490,270 480,250 500,220 C510,250 530,260 550,280 C540,320 520,380 520,400 L400,400 Z" fill="%23050505" opacity="1"/></svg>');
             background-size: cover;
             background-position: bottom center;
             background-repeat: no-repeat;
             z-index: -1;
-            filter: drop-shadow(0 -10px 20px rgba(0,0,0,0.5));
-        }
-
-        /* Sun glow */
-        .sun {
-            position: absolute;
-            bottom: 20vh;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 300px; height: 300px;
-            background: radial-gradient(circle, #fff 0%, #ffde00 20%, transparent 70%);
-            z-index: -2;
-            opacity: 0.8;
-            filter: blur(10px);
         }
 
         .overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.7) 100%);
-            z-index: -1;
+            background: linear-gradient(to bottom, transparent 0%, rgba(5,5,5,0.8) 100%);
+            z-index: 0;
             pointer-events: none;
         }
 
-        /* ─── Rockstar Style Navbar ─── */
+        /* ─── Layout Wrapper ─── */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* ─── Navbar ─── */
         header {
             position: fixed;
             top: 0; width: 100%;
@@ -88,30 +85,26 @@
             align-items: center;
             padding: 1.5rem 3rem;
             z-index: 100;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
+            background: linear-gradient(to bottom, rgba(5,5,5,0.9) 0%, transparent 100%);
+            backdrop-filter: blur(2px);
         }
 
         .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
+            display: flex; align-items: center; gap: 12px; text-decoration: none;
         }
 
-        .rs-logo {
-            width: 45px; height: 45px;
-            background: var(--rs-gold);
-            border-radius: 4px;
-            color: var(--rs-black);
+        .logo-box {
+            width: 40px; height: 40px;
+            background: var(--text-light);
+            color: var(--bg-dark);
             display: flex; align-items: center; justify-content: center;
             font-family: 'Anton', sans-serif;
-            font-size: 24px;
-            font-weight: bold;
-            line-height: 1;
+            font-size: 22px;
+            border-radius: 4px;
         }
 
         .logo-text {
-            color: var(--rs-white);
+            color: var(--text-light);
             font-family: 'Anton', sans-serif;
             font-size: 1.2rem;
             letter-spacing: 1px;
@@ -119,266 +112,391 @@
         }
 
         .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
+            display: flex; gap: 2rem; align-items: center;
         }
 
         .nav-link {
-            color: var(--rs-white);
+            color: var(--text-light);
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             transition: color 0.3s;
         }
 
-        .nav-link:hover {
-            color: var(--rs-gold);
-        }
+        .nav-link:hover { color: var(--accent-cyan); }
 
         .nav-link-btn {
-            background: transparent;
-            border: 2px solid var(--rs-white);
-            padding: 8px 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 24px;
             border-radius: 30px;
             transition: all 0.3s;
+            backdrop-filter: blur(5px);
         }
 
         .nav-link-btn:hover {
-            background: var(--rs-white);
-            color: var(--rs-black);
+            background: var(--text-light);
+            color: var(--bg-dark);
         }
 
-        /* ─── Hero Content ─── */
-        .hero {
-            height: 100vh;
+        /* ─── Section Shared Styles ─── */
+        section {
+            padding: 6rem 2rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            padding-top: 5vh;
-            z-index: 10;
+        }
+
+        /* ─── Hero Section ─── */
+        .hero {
+            height: 100vh;
+            padding-top: 0;
             position: relative;
         }
 
-        /* The massive VI style logo */
-        .title-vi {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 18rem;
-            line-height: 0.8;
-            background: linear-gradient(to bottom, #fff 0%, #f472b6 40%, #c084fc 100%);
+        .hero-title {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(4rem, 10vw, 12rem);
+            line-height: 0.9;
+            background: linear-gradient(to bottom, #fff 0%, var(--accent-pink) 60%, var(--accent-purple) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 20px rgba(244, 114, 182, 0.4));
-            margin-bottom: -2rem;
-            position: relative;
-            z-index: 2;
-            letter-spacing: -5px;
-            animation: fadeIn 2s ease-out;
+            text-shadow: 0 10px 30px rgba(244, 114, 182, 0.3);
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: -2px;
         }
 
-        .title-subtitle {
-            font-family: 'Anton', sans-serif;
-            font-size: 3rem;
-            color: var(--rs-white);
-            letter-spacing: 8px;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--text-light);
+            font-weight: 300;
+            letter-spacing: 4px;
             margin-bottom: 3rem;
-            position: relative;
-            z-index: 3;
-            animation: slideUp 2s ease-out 0.5s both;
+            text-align: center;
+            text-transform: uppercase;
         }
 
-        /* Cinematic Action Buttons */
-        .cta-container {
-            display: flex;
-            gap: 1.5rem;
-            animation: slideUp 2s ease-out 1s both;
-            z-index: 10;
+        .hero-cta {
+            display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center;
         }
 
-        .btn-cinematic {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(0, 0, 0, 0.6);
+        .btn-main {
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--rs-white);
-            text-decoration: none;
+            color: var(--text-light);
             padding: 1rem 2.5rem;
             font-size: 1.1rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 2px;
-            border-radius: 4px;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex; align-items: center; gap: 10px;
         }
 
-        .btn-cinematic::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-cinematic:hover::before {
-            left: 100%;
-        }
-
-        .btn-cinematic:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--rs-white);
-            transform: translateY(-2px);
+        .btn-main:hover {
+            background: var(--text-light);
+            color: var(--bg-dark);
+            transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
 
-        .btn-primary-rs {
-            background: var(--rs-white);
-            color: var(--rs-black);
-            border-color: var(--rs-white);
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
         }
 
-        .btn-primary-rs:hover {
-            background: var(--rs-gold);
-            border-color: var(--rs-gold);
-            color: var(--rs-black);
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-15px) translateX(-50%); }
+            60% { transform: translateY(-7px) translateX(-50%); }
+        }
+
+        /* ─── Features Section ─── */
+        .features-section {
+            background: linear-gradient(to bottom, transparent, var(--bg-dark) 20%);
+            min-height: 100vh;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ─── Community Stats Section ─── */
+        .stats-section {
+            background-color: var(--bg-dark);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 8rem 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            width: 100%;
+            max-width: 1000px;
+            text-align: center;
+        }
+
+        .stat-item h4 {
+            font-size: 4rem;
+            font-family: 'Anton', sans-serif;
+            color: var(--accent-pink);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ─── Final CTA Section ─── */
+        .cta-section {
+            background-color: var(--bg-dark);
+            min-height: 60vh;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-family: 'Anton', sans-serif;
+            margin-bottom: 1.5rem;
         }
 
         /* ─── Footer ─── */
         footer {
-            position: absolute;
-            bottom: 0; width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            padding: 2rem 3rem;
-            z-index: 100;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
-            animation: fadeIn 2s ease-out 1.5s both;
-        }
-
-        .footer-left {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .rating-badge {
-            border: 2px solid var(--rs-white);
-            padding: 5px 10px;
+            background-color: #000;
+            padding: 3rem;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: var(--rs-black);
-            font-family: 'Arial', sans-serif;
-            font-weight: bold;
+            gap: 1.5rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
-        .rating-badge span:first-child { font-size: 24px; line-height: 1; }
-        .rating-badge span:last-child { font-size: 10px; }
-
-        .footer-text {
-            font-size: 0.75rem;
-            color: var(--rs-gray);
-            max-width: 500px;
-            line-height: 1.5;
+        .footer-logo {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            color: var(--text-light);
         }
 
         .footer-links {
-            display: flex;
-            gap: 1.5rem;
+            display: flex; gap: 1.5rem;
         }
 
         .footer-links a {
-            color: var(--rs-white);
-            text-decoration: none;
-            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-size: 1.5rem;
             transition: color 0.3s;
         }
 
-        .footer-links a:hover {
-            color: var(--rs-gold);
+        .footer-links a:hover { color: var(--text-light); }
+
+        .copyright {
+            color: #555;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Responsive */
+        /* ─── Responsive ─── */
         @media (max-width: 768px) {
-            .title-vi { font-size: 10rem; }
-            .title-subtitle { font-size: 2rem; }
-            .cta-container { flex-direction: column; width: 80%; }
-            .btn-cinematic { justify-content: center; }
             header { padding: 1rem; }
-            footer { flex-direction: column; align-items: center; gap: 1rem; text-align: center; padding: 1rem; }
-            .footer-left { flex-direction: column; }
+            .nav-links { display: none; } /* Could add hamburger menu later */
+            .hero-cta { flex-direction: column; align-items: stretch; }
+            .btn-main { justify-content: center; }
+            section { padding: 4rem 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Cinematic Background -->
-    <div class="hero-background"></div>
+    <!-- Fixed Backgrounds -->
+    <div class="fixed-bg"></div>
     <div class="sun"></div>
     <div class="palm-trees"></div>
     <div class="overlay"></div>
 
-    <!-- Rockstar Style Navbar -->
-    <header>
-        <a href="/" class="logo-container">
-            <div class="rs-logo">A</div>
-            <span class="logo-text">Ahmad's Blog</span>
-        </a>
-        <nav class="nav-links">
-            <a href="{{ url_for('login') }}" class="nav-link">Log In</a>
-            <a href="{{ url_for('register') }}" class="nav-link nav-link-btn">Register</a>
-        </nav>
-    </header>
-
-    <!-- Main Hero Content -->
-    <main class="hero">
-        <h1 class="title-vi">BLOG</h1>
-        <h2 class="title-subtitle">AHMAD'S SPACE</h2>
-        
-        <div class="cta-container">
-            <a href="{{ url_for('login') }}" class="btn-cinematic btn-primary-rs">
-                <i class="fas fa-play"></i> Log In Now
+    <div class="content-wrapper">
+        <!-- Navbar -->
+        <header>
+            <a href="/" class="logo-container">
+                <div class="logo-box">A</div>
+                <span class="logo-text">Ahmad's Space</span>
             </a>
-            <a href="{{ url_for('register') }}" class="btn-cinematic">
-                <i class="fas fa-user-plus"></i> Join Community
-            </a>
-        </div>
-    </main>
+            <nav class="nav-links">
+                <a href="{{ url_for('login') }}" class="nav-link">Log In</a>
+                <a href="{{ url_for('register') }}" class="nav-link nav-link-btn">Register</a>
+            </nav>
+        </header>
 
-    <!-- Minimalist Footer -->
-    <footer>
-        <div class="footer-left">
-            <div class="footer-text">
-                &copy; 2025 Ahmad's Blog. All rights reserved. Exploring ideas, code, and more.
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <h1 class="hero-title">EXPLORE</h1>
+            <h2 class="hero-subtitle">IDEAS, CODE, AND BEYOND</h2>
+            
+            <div class="hero-cta">
+                <a href="{{ url_for('login') }}" class="btn-main">
+                    <i class="fas fa-sign-in-alt"></i> Access Account
+                </a>
+                <a href="#features" class="btn-main" style="background: transparent; color: var(--text-light);">
+                    Learn More <i class="fas fa-arrow-down"></i>
+                </a>
             </div>
-        </div>
-        <div class="footer-links">
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="https://github.com/MuhammadAhmadgeek" target="_blank"><i class="fab fa-github"></i></a>
-        </div>
-    </footer>
+
+            <div class="scroll-indicator">
+                <span>Scroll</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section" id="features">
+            <div class="section-header">
+                <h2>Why Join Us?</h2>
+                <p>Discover a platform designed for sharing knowledge, engaging with a community, and reading top-tier tech articles.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-book-reader feature-icon"></i>
+                    <h3>Curated Content</h3>
+                    <p>Read in-depth articles on software engineering, artificial intelligence, and modern web development.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-users feature-icon"></i>
+                    <h3>Active Community</h3>
+                    <p>Engage with other developers, leave comments, and share your unique perspectives on every post.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-pen-nib feature-icon"></i>
+                    <h3>Share Your Voice</h3>
+                    <p>Create your own posts with our rich text editor and publish your ideas directly to the platform.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Stats Section -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h4>10k+</h4>
+                    <p>Active Readers</p>
+                </div>
+                <div class="stat-item">
+                    <h4>500+</h4>
+                    <p>Published Articles</p>
+                </div>
+                <div class="stat-item">
+                    <h4>24/7</h4>
+                    <p>Community Access</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="cta-section">
+            <h2>Ready to Dive In?</h2>
+            <p style="color: var(--text-muted); margin-bottom: 3rem; font-size: 1.2rem; max-width: 500px; text-align: center;">Join thousands of other developers shaping the future of the web.</p>
+            <div class="hero-cta">
+                <a href="{{ url_for('register') }}" class="btn-main" style="background: var(--text-light); color: var(--bg-dark);">
+                    <i class="fas fa-user-plus"></i> Create Free Account
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-logo">AHMAD'S SPACE</div>
+            <div class="footer-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/MuhammadAhmadgeek" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Ahmad's Blog. All rights reserved.
+            </div>
+        </footer>
+    </div>
 
 </body>
 </html>
