@@ -3,244 +3,386 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome | Ahmad's Blog</title>
+    <title>Ahmad's Blog VI</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chalet:wght@400;700&family=Oswald:wght@500;700&family=Roboto:wght@300;400;500;700&family=Pricedown&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <style>
+        /* Custom Font Fallbacks (mimicking GTA fonts) */
+        @import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@400;600;900&display=swap');
+
         :root {
-            --bg: #0a0b10;
-            --surface: #141620;
-            --primary: #4ade80;
-            --secondary: #3b82f6;
-            --text: #f8fafc;
+            --rs-black: #000000;
+            --rs-gold: #ffaa00;
+            --rs-white: #ffffff;
+            --rs-gray: #aaaaaa;
+            --sunset-top: #fca5a5;
+            --sunset-mid: #f472b6;
+            --sunset-bottom: #c084fc;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
         }
 
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
+        body, html {
+            height: 100%;
+            background-color: var(--rs-black);
+            color: var(--rs-white);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* ─── Cinematic Background ─── */
+        .hero-background {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(to bottom, #4facfe 0%, #ff0844 50%, #ffb199 100%);
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        /* Palm Tree Silhouettes using CSS masking/SVG data */
+        .palm-trees {
+            position: absolute;
+            bottom: -5vh; left: 0; width: 100vw; height: 60vh;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" preserveAspectRatio="none"><path d="M0,400 L0,300 C50,300 80,250 100,200 C110,220 120,240 130,220 C140,200 130,150 150,120 C160,160 180,180 200,200 C180,250 150,350 150,400 L0,400 Z" fill="black" opacity="0.8"/><path d="M800,400 L800,280 C850,280 880,220 900,180 C910,200 920,220 930,200 C940,180 930,120 950,90 C960,140 980,160 1000,180 L1000,400 L800,400 Z" fill="black" opacity="0.9"/><path d="M400,400 L400,350 C420,350 440,300 450,280 C460,300 470,310 480,290 C490,270 480,250 500,220 C510,250 530,260 550,280 C540,320 520,380 520,400 L400,400 Z" fill="black" opacity="0.7"/></svg>');
+            background-size: cover;
+            background-position: bottom center;
+            background-repeat: no-repeat;
+            z-index: -1;
+            filter: drop-shadow(0 -10px 20px rgba(0,0,0,0.5));
+        }
+
+        /* Sun glow */
+        .sun {
+            position: absolute;
+            bottom: 20vh;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, #fff 0%, #ffde00 20%, transparent 70%);
+            z-index: -2;
+            opacity: 0.8;
+            filter: blur(10px);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.7) 100%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* ─── Rockstar Style Navbar ─── */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
+        }
+
+        .logo-container {
             display: flex;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            perspective: 1000px;
+            gap: 10px;
+            text-decoration: none;
         }
 
-        /* Animated Background Particles */
-        .bg-particles {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-            overflow: hidden;
+        .rs-logo {
+            width: 45px; height: 45px;
+            background: var(--rs-gold);
+            border-radius: 4px;
+            color: var(--rs-black);
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Anton', sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            line-height: 1;
         }
 
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--primary);
-            border-radius: 50%;
-            box-shadow: 0 0 20px 2px var(--primary);
-            animation: float 15s infinite linear;
-            opacity: 0.5;
+        .logo-text {
+            color: var(--rs-white);
+            font-family: 'Anton', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        @keyframes float {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { transform: translateY(-100px) scale(2); opacity: 0; }
-        }
-
-        .container {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            max-width: 800px;
-            padding: 2rem;
-            transform-style: preserve-3d;
-            animation: enter 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        @keyframes enter {
-            0% { transform: translateZ(-500px) rotateX(20deg); opacity: 0; }
-            100% { transform: translateZ(0) rotateX(0); opacity: 1; }
-        }
-
-        h1 {
-            font-size: 5rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #fff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transform: translateZ(50px);
-        }
-
-        p.subtitle {
-            font-size: 1.5rem;
-            color: #94a3b8;
-            margin-bottom: 4rem;
-            transform: translateZ(30px);
-        }
-
-        .options-grid {
+        .nav-links {
             display: flex;
             gap: 2rem;
-            justify-content: center;
-            transform-style: preserve-3d;
+            align-items: center;
         }
 
-        /* 3D Card Styling */
-        .card-3d {
-            background: rgba(20, 22, 32, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 3rem 2rem;
-            border-radius: 24px;
-            width: 280px;
+        .nav-link {
+            color: var(--rs-white);
             text-decoration: none;
-            color: var(--text);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform: translateZ(0);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--rs-gold);
+        }
+
+        .nav-link-btn {
+            background: transparent;
+            border: 2px solid var(--rs-white);
+            padding: 8px 20px;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+
+        .nav-link-btn:hover {
+            background: var(--rs-white);
+            color: var(--rs-black);
+        }
+
+        /* ─── Hero Content ─── */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 5vh;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* The massive VI style logo */
+        .title-vi {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 18rem;
+            line-height: 0.8;
+            background: linear-gradient(to bottom, #fff 0%, #f472b6 40%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(244, 114, 182, 0.4));
+            margin-bottom: -2rem;
+            position: relative;
+            z-index: 2;
+            letter-spacing: -5px;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .title-subtitle {
+            font-family: 'Anton', sans-serif;
+            font-size: 3rem;
+            color: var(--rs-white);
+            letter-spacing: 8px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 3;
+            animation: slideUp 2s ease-out 0.5s both;
+        }
+
+        /* Cinematic Action Buttons */
+        .cta-container {
+            display: flex;
+            gap: 1.5rem;
+            animation: slideUp 2s ease-out 1s both;
+            z-index: 10;
+        }
+
+        .btn-cinematic {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--rs-white);
+            text-decoration: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 4px;
+            transition: all 0.3s;
             position: relative;
             overflow: hidden;
         }
 
-        .card-3d::before {
+        .btn-cinematic::before {
             content: '';
             position: absolute;
             top: 0; left: -100%;
-            width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-            transform: skewX(-20deg);
-            transition: 0.5s;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
         }
 
-        .card-3d:hover::before {
-            left: 150%;
+        .btn-cinematic:hover::before {
+            left: 100%;
         }
 
-        .card-3d:hover {
-            transform: translateZ(40px) translateY(-10px) rotateX(10deg) rotateY(-5deg);
-            border-color: var(--primary);
-            box-shadow: 0 35px 60px -15px rgba(74, 222, 128, 0.2),
-                        0 0 40px rgba(74, 222, 128, 0.1);
+        .btn-cinematic:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--rs-white);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
 
-        .card-3d.register:hover {
-            border-color: var(--secondary);
-            box-shadow: 0 35px 60px -15px rgba(59, 130, 246, 0.2),
-                        0 0 40px rgba(59, 130, 246, 0.1);
-            transform: translateZ(40px) translateY(-10px) rotateX(10deg) rotateY(5deg);
+        .btn-primary-rs {
+            background: var(--rs-white);
+            color: var(--rs-black);
+            border-color: var(--rs-white);
         }
 
-        .card-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            transition: transform 0.3s ease;
-            transform: translateZ(20px);
+        .btn-primary-rs:hover {
+            background: var(--rs-gold);
+            border-color: var(--rs-gold);
+            color: var(--rs-black);
         }
 
-        .card-3d.login .card-icon { color: var(--primary); }
-        .card-3d.register .card-icon { color: var(--secondary); }
-
-        .card-3d:hover .card-icon {
-            transform: translateZ(40px) scale(1.1);
-        }
-
-        .card-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            transform: translateZ(20px);
-        }
-
-        .card-desc {
-            font-size: 1rem;
-            color: #94a3b8;
-            transform: translateZ(10px);
-        }
-
-        /* 3D Mouse tracking effect setup */
-        .scene {
-            width: 100vw;
-            height: 100vh;
+        /* ─── Footer ─── */
+        footer {
             position: absolute;
-            top: 0; left: 0;
+            bottom: 0; width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 2rem 3rem;
+            z-index: 100;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+            animation: fadeIn 2s ease-out 1.5s both;
+        }
+
+        .footer-left {
             display: flex;
             align-items: center;
-            justify-content: center;
-            perspective: 1200px;
+            gap: 2rem;
         }
 
+        .rating-badge {
+            border: 2px solid var(--rs-white);
+            padding: 5px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: var(--rs-black);
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+        }
+
+        .rating-badge span:first-child { font-size: 24px; line-height: 1; }
+        .rating-badge span:last-child { font-size: 10px; }
+
+        .footer-text {
+            font-size: 0.75rem;
+            color: var(--rs-gray);
+            max-width: 500px;
+            line-height: 1.5;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--rs-white);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--rs-gold);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title-vi { font-size: 10rem; }
+            .title-subtitle { font-size: 2rem; }
+            .cta-container { flex-direction: column; width: 80%; }
+            .btn-cinematic { justify-content: center; }
+            header { padding: 1rem; }
+            footer { flex-direction: column; align-items: center; gap: 1rem; text-align: center; padding: 1rem; }
+            .footer-left { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="bg-particles" id="particles"></div>
+    <!-- Cinematic Background -->
+    <div class="hero-background"></div>
+    <div class="sun"></div>
+    <div class="palm-trees"></div>
+    <div class="overlay"></div>
 
-    <div class="scene" id="scene">
-        <div class="container" id="container3d">
-            <h1>Ahmad's Blog</h1>
-            <p class="subtitle">Explore ideas, code, and more.</p>
-            
-            <div class="options-grid">
-                <a href="{{ url_for('login') }}" class="card-3d login">
-                    <div class="card-icon"><i class="fas fa-sign-in-alt"></i></div>
-                    <h2 class="card-title">Log In</h2>
-                    <p class="card-desc">Welcome back! Access your account.</p>
-                </a>
-                
-                <a href="{{ url_for('register') }}" class="card-3d register">
-                    <div class="card-icon"><i class="fas fa-user-plus"></i></div>
-                    <h2 class="card-title">Register</h2>
-                    <p class="card-desc">Join the community. Create an account.</p>
-                </a>
+    <!-- Rockstar Style Navbar -->
+    <header>
+        <a href="/" class="logo-container">
+            <div class="rs-logo">A</div>
+            <span class="logo-text">Ahmad's Blog</span>
+        </a>
+        <nav class="nav-links">
+            <a href="{{ url_for('login') }}" class="nav-link">Log In</a>
+            <a href="{{ url_for('register') }}" class="nav-link nav-link-btn">Register</a>
+        </nav>
+    </header>
+
+    <!-- Main Hero Content -->
+    <main class="hero">
+        <h1 class="title-vi">VI</h1>
+        <h2 class="title-subtitle">AHMAD'S BLOG</h2>
+        
+        <div class="cta-container">
+            <a href="{{ url_for('login') }}" class="btn-cinematic btn-primary-rs">
+                <i class="fas fa-play"></i> Log In Now
+            </a>
+            <a href="{{ url_for('register') }}" class="btn-cinematic">
+                <i class="fas fa-user-plus"></i> Join Community
+            </a>
+        </div>
+    </main>
+
+    <!-- Minimalist Footer -->
+    <footer>
+        <div class="footer-left">
+            <div class="rating-badge">
+                <span>M</span>
+                <span>MATURE 17+</span>
+            </div>
+            <div class="footer-text">
+                &copy; 2025 Ahmad's Blog. This is a portfolio project inspired by AAA game design. All rights reserved. Rockstar Games, Grand Theft Auto, and the R* logo are marks/logos/copyrights of Take-Two Interactive.
             </div>
         </div>
-    </div>
+        <div class="footer-links">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/MuhammadAhmadgeek" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+    </footer>
 
-    <script>
-        // Generate Particles
-        const particlesContainer = document.getElementById('particles');
-        for(let i = 0; i < 40; i++) {
-            const p = document.createElement('div');
-            p.className = 'particle';
-            p.style.left = Math.random() * 100 + 'vw';
-            p.style.animationDelay = (Math.random() * 15) + 's';
-            p.style.animationDuration = (10 + Math.random() * 20) + 's';
-            particlesContainer.appendChild(p);
-        }
-
-        // 3D Mouse Tracking
-        const scene = document.getElementById('scene');
-        const container = document.getElementById('container3d');
-
-        scene.addEventListener('mousemove', (e) => {
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-            container.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-        });
-
-        scene.addEventListener('mouseenter', () => {
-            container.style.transition = 'none';
-        });
-
-        scene.addEventListener('mouseleave', () => {
-            container.style.transition = 'transform 0.5s ease';
-            container.style.transform = `rotateY(0deg) rotateX(0deg)`;
-        });
-    </script>
 </body>
 </html>
